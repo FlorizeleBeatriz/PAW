@@ -21,20 +21,20 @@
                         <span> Medicamentos</span>
                         <span class="menu-arrow"></span>
                     </a>
-                <ul class="nav-second-level" aria-expanded="false">
-                <li>
-                    <a href="his_farm_add_pharmaceuticals.php">Cadastrar Medicamentos</a>
-                </li>
-                <li>
-                    <a href="his_farm_view_pharmaceuticals.php">Visualizar Medicamentos</a>
-                </li>
-                <li>
-                    <a href="his_farm_manage_pharmaceuticals.php">Gestão de Medicamentos</a>
-                </li>
-                <li>
-                    <a href="his_farm_manage_pharm_cat.php">Gestão de Categoria de Medicamentos</a>
-                </li>
-            </ul>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li>
+                            <a href="his_farm_add_pharmaceuticals.php">Cadastrar Medicamentos</a>
+                        </li>
+                        <li>
+                            <a href="his_farm_view_pharmaceuticals.php">Visualizar Medicamentos</a>
+                        </li>
+                        <li>
+                            <a href="his_farm_manage_pharmaceuticals.php">Gestão de Medicamentos</a>
+                        </li>
+                        <li>
+                            <a href="his_farm_manage_pharm_cat.php">Gestão de Categoria de Medicamentos</a>
+                        </li>
+                    </ul>
                 </li>
                 <hr>
                 <li>
@@ -48,7 +48,26 @@
                         <li>
                             <a href="his_farm_pharm_inventory.php">Medicamentos</a>
                         </li>
+                    </ul>
                 </li>
+                <hr>
+                <li>
+                    <a href="javascript: void(0);">
+                        <i class="mdi mdi-cash-refund "></i>
+                        <span> Prescrições</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+
+                    <li>
+                                        <a href="his_farm_view_presc.php">Visualizar Prescrições</a>
+                                    </li>
+                    </ul>
+                </li>
+
+
+
+
 
 
                 <!--
@@ -148,8 +167,8 @@
                             <a href="his_doc_view_payrolls.php">My Payrolls</a>
                         </li>
                     </ul>
-                </li>
-            </ul>-->
+                </li>-->
+            </ul>
 
         </div>
         <!-- End Sidebar -->

@@ -42,8 +42,8 @@ $doc_id = $_SESSION['doc_id']
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Patients</a></li>
-                                        <li class="breadcrumb-item active">View Patients</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Pacientes</a></li>
+                                        <li class="breadcrumb-item active">Visualizar Pacientes</li>
                                     </ol>
                                 </div>
                                 <h4 class="page-title">Detalhes do paciente</h4>
@@ -56,34 +56,18 @@ $doc_id = $_SESSION['doc_id']
                         <div class="col-12">
                             <div class="card-box">
                                 <h4 class="header-title"></h4>
-                                <div class="mb-2">
-                                    <div class="row">
-                                        <div class="col-12 text-sm-center form-inline">
-                                            <div class="form-group mr-2" style="display:none">
-                                                <select id="demo-foo-filter-status" class="custom-select custom-select-sm">
-                                                    <option value="">Show all</option>
-                                                    <option value="Discharged">Discharged</option>
-                                                    <option value="OutPatients">OutPatients</option>
-                                                    <option value="InPatients">InPatients</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <input id="demo-foo-search" type="text" placeholder="Search" class="form-control form-control-sm" autocomplete="on">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            
 
                                 <div class="table-responsive">
-                                    <table id="demo-foo-filtering" class="table table-bordered toggle-circle mb-0" data-page-size="7">
+                                    <table id=""  class="table" data-page-size="7">
                                         <thead>
                                             <tr>
-                                                <th data-hide="phone">Id do Paciente</th>
-                                                <th data-toggle="true">Nome Paciente </th>
-                                                <th data-hide="phone">Endereço do Paciente </th>
-                                                <th data-hide="phone">Contacto do Paciente</th>
-                                                <th data-hide="phone">Idade do Paciente</th>
-                                                <th data-hide="phone">Action</th>
+                                                <th scope="col">Id do Paciente</th>
+                                                <th scope="col">Nome Paciente </th>
+                                                <th scope="col">Endereço do Paciente </th>
+                                                <th scope="col">Contacto do Paciente</th>
+                                                <th scope="col">Idade do Paciente</th>
+                                                <th scope="col">Acções</th>
                                             </tr>
                                         </thead>
                                         <?php
@@ -92,7 +76,6 @@ $doc_id = $_SESSION['doc_id']
                                                 *
                                             */
                                         $ret = "SELECT * FROM  his_patients ORDER BY RAND() ";
-                                        //sql code to get to ten docs  randomly
                                         $stmt = $mysqli->prepare($ret);
                                         $stmt->execute(); //ok
                                         $res = $stmt->get_result();
@@ -102,7 +85,7 @@ $doc_id = $_SESSION['doc_id']
 
                                             <tbody>
                                                 <tr>
-                                                    <td><?php echo $row->pat_id; ?></td>
+                                                    <th scope="row"><?php echo $row->pat_id; ?></th>
                                                     <td><?php echo $row->pat_fname; ?> <?php echo $row->pat_lname; ?></td>
                                                     <td><?php echo $row->pat_addr; ?> </td>
                                                     <td><?php echo $row->pat_phone; ?></td>
@@ -134,7 +117,7 @@ $doc_id = $_SESSION['doc_id']
             </div> <!-- content -->
 
             <!-- Footer Start -->
-            <?php include('assets/inc/footer.php'); ?>
+            <?php include('assets/inc/footer1.php'); ?>
             <!-- end Footer -->
 
         </div>

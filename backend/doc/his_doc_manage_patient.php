@@ -69,7 +69,7 @@ $pat_number = isset($_GET['pat_number']) ? $_GET['pat_number'] : '';
                                         <li class="breadcrumb-item active">Gestão de pacientes</li>
                                     </ol>
                                 </div>
-                                <h4 class="page-title">Gestão de Dados do Paciente</h4>
+                                <h4 class="page-title mb-4">Gestão de Dados do Paciente</h4>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@ $pat_number = isset($_GET['pat_number']) ? $_GET['pat_number'] : '';
 
                                 <tbody>
                                     <tr>
-                                        <th><?php echo $row->pat_id; ?></th>
+                                        <th scope="row"><?php echo $row->pat_id; ?></th>
                                         <td><?php echo $row->pat_fname; ?> <?php echo $row->pat_lname; ?></td>
                                         <td><?php echo $row->pat_number; ?></td>
                                         <td><?php echo $row->pat_age; ?></td>
@@ -113,7 +113,7 @@ $pat_number = isset($_GET['pat_number']) ? $_GET['pat_number'] : '';
                                         <td>
                                             <!-- <a href="his_admin_manage_patient.php?delete=<?php echo $row->pat_id; ?>" class="badge badge-danger"><i class=" mdi mdi-trash-can-outline "></i> Delete</a>-->
                                             <a href="his_doc_view_single_patient.php?pat_id=<?php echo $row->pat_id; ?>&&pat_number=<?php echo $row->pat_number; ?>" class="badge badge-success"><i class="mdi mdi-eye"></i> View</a>
-                                            <!--<a href="his_doc_update_single_patient.php?pat_id=<?php echo $row->pat_id; ?>" class="badge badge-primary"><i class="mdi mdi-check-box-outline "></i> Update</a>-->
+                                            <a href="his_doc_update_single_patient.php?pat_id=<?php echo $row->pat_id; ?>" class="badge badge-primary"><i class="mdi mdi-check-box-outline "></i> Update</a>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -39,6 +39,9 @@
                         <li>
                             <a href="his_doc_view_presc.php">Visualizar Prescrições</a>
                         </li>
+                        <li>
+                            <a href="his_doc_manage_presc.php">Gestão de Prescrições</a>
+                        </li>
                     </ul>
                 </li>
 

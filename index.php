@@ -38,10 +38,10 @@
                 </div>
                 <nav id="nav-menu-container">
         <ul class="nav-menu">
-            <li class="menu-active"><a href="index.php">Início</a></li>
-            <li><a href="backend/doc/index.php">Médico</a></li>
+            <li class="menu-active"><a href="index.php">Home</a></li>
             <li><a href="backend/admin/index.php">Administrador</a></li>
             <li><a href="backend/rece/index.php">Recepcionista</a></li>
+            <li><a href="backend/doc/index.php">Médico</a></li>
             <li><a href="backend/farm/index.php">Farmacêutico</a></li>
             <li><a href="backend/teso/index.php">Tesoureiro</a></li>
         </ul>

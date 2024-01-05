@@ -3,57 +3,40 @@
   include('assets/inc/config.php');
   include('assets/inc/checklogin.php');
   check_login();
-  $doc_id = $_SESSION['doc_id'];
-  
-  if(isset($_GET['delete']))
-  {
-        $id=intval($_GET['delete']);
-        $adn="DELETE FROM his_prescriptions WHERE pres_number=?";
-        $stmt= $mysqli->prepare($adn);
-        $stmt->bind_param('i',$id);
-        $stmt->execute();
-        $stmt->close();	 
-  
-          if($stmt)
-          {
-            $success = "Prescrição removida.";
-          }
-            else
-            {
-                $err = "Tente novamente mais tarde";
-            }
-    }
-    ?>
+  $farm_id=$_SESSION['farm_id'];
+
+?>
+
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
     
 <?php include('assets/inc/head.php');?>
 
     <body>
 
-        <!-- Início da página -->
+        <!-- Begin page -->
         <div id="wrapper">
 
-            <!-- Barra superior -->
+            <!-- Topbar Start -->
                 <?php include('assets/inc/nav.php');?>
-            <!-- Fim da barra superior -->
+            <!-- end Topbar -->
 
-            <!-- ========== Início da barra lateral esquerda ========== -->
+            <!-- ========== Left Sidebar Start ========== -->
                 <?php include("assets/inc/sidebar.php");?>
-            <!-- Fim da barra lateral esquerda -->
+            <!-- Left Sidebar End -->
 
             <!-- ============================================================== -->
-            <!-- Início do conteúdo da página -->
+            <!-- Start Page Content here -->
             <!-- ============================================================== -->
 
             <div class="content-page">
                 <div class="content">
 
-                    <!-- Início do conteúdo -->
+                    <!-- Start Content-->
                     <div class="container-fluid">
                         
-                        <!-- Início do título da página -->
+                        <!-- start page title -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
@@ -61,41 +44,40 @@
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Farmácia</a></li>
-                                            <li class="breadcrumb-item active">Gestão de Prescrições</li>
+                                            <li class="breadcrumb-item active">Visualizar Prescrições</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Gestão de Prescrições</h4>
+                                    <h4 class="page-title">Visualizar Prescrições</h4>
                                 </div>
                             </div>
                         </div>     
-                        <!-- Fim do título da página --> 
+                        <!-- end page title --> 
 
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
                                     <h4 class="header-title"></h4>
-                                   
+                                 
                                     
                                     <div class="table-responsive">
-                                        <table id="" class="table mb-4" data-page-size="7">
+                                        <table  class="table" data-page-size="7">
                                             <thead>
                                             <tr>
-                                                <th scope="col">>#</th>
-                                                <th scope="col">>Nome do Paciente</th>
+                                                <th>#</th>
+                                                <th scope="col">Nome do Paciente</th>
                                                 <th scope="col">Número do Paciente</th>
-                                                <th scope="col">Endereço</th>
-                                                <th scope="col">Idade</th>
-                                                <th scope="col">Data</th>
-                                                <th scope="col">Ação</th>
+                                                <th scope="col">Idade do Paciente</th>
+                                                <th scope="col">Descrição </th>
+                                                <th scope="col">Acções</th>
                                             </tr>
                                             </thead>
                                             <?php
                                             /*
-                                                *Obter detalhes de todos os pacientes
+                                                *get details of allpatients
                                                 *
                                             */
                                                 $ret="SELECT * FROM  his_prescriptions ORDER BY RAND() "; 
-                                                //código SQL para obter aleatoriamente os detalhes de dez documentos
+                                                //sql code to get to ten docs  randomly
                                                 $stmt= $mysqli->prepare($ret) ;
                                                 $stmt->execute() ;//ok
                                                 $res=$stmt->get_result();
@@ -106,18 +88,14 @@
 
                                                 <tbody>
                                                 <tr>
-                                                    <th scope="row"><?php echo $cnt;?></th>
+                                                    <th><?php echo $cnt;?></th>
                                                     <td><?php echo $row->pres_pat_name;?></td>
                                                     <td><?php echo $row->pres_pat_number;?></td>
-                                                    <td><?php echo $row->pres_pat_addr;?></td>
-                                                    <td><?php echo $row->pres_pat_age;?> Anos</td>
-                                                    <td><?php echo $row->pres_date;?></td>
-                                                    <td>
-                                                        <a href="his_doc_view_single_pres.php?pres_number=<?php echo $row->pres_number;?>&&pres_id=<?php echo $row->pres_id;?>" class="badge badge-success"><i class="fas fa-eye"></i> Ver</a>
-                                                        <a href="his_doc_upate_single_pres.php?pres_number=<?php echo $row->pres_number;?>" class="badge badge-warning"><i class="fas fa-eye-dropper "></i> Atualizar</a>
-                                                        <a href="his_doc_manage_presc.php?delete=<?php echo $row->pres_number;?>" class="badge badge-danger"><i class=" fas fa-trash-alt "></i> Excluir</a>
-
-                                                    </td>
+                                                    <td><?php echo $row->pres_pat_age;?> Years</td>
+                                                    <td><?php echo $row->pres_ins;?></td>
+                                                    
+                                                    <td><a href="his_farm_view_single_pres.php?pres_number=<?php echo $row->pres_number;?>&&pres_id=<?php echo $row->pres_id;?>" class="badge badge-success"><i class="fas fa-eye"></i> View Prescription</a>
+                                                   <!-- <a href="his_doc_view_single_pres.php?delete=<?php echo isset($row->pres_id) ? $row->pres_id : ''; ?>" class="badge badge-danger">Delete</a>-->
                                                 </tr>
                                                 </tbody>
                                             <?php  $cnt = $cnt +1 ; }?>
@@ -134,6 +112,7 @@
                                     </div> <!-- end .table-responsive-->
                                 </div> <!-- end card-box -->
                             </div> <!-- end col -->
+                            <button class="btn btn-primary" type="submit" <?php echo $row->farm_name; ?> > Adicionar</button>
                         </div>
                         <!-- end row -->
 
@@ -141,34 +120,34 @@
 
                 </div> <!-- content -->
 
-                <!-- Rodapé -->
+                <!-- Footer Start -->
                  <?php include('assets/inc/footer1.php');?>
-                <!-- Fim do rodapé -->
+                <!-- end Footer -->
 
             </div>
 
             <!-- ============================================================== -->
-            <!-- Fim do conteúdo da página -->
+            <!-- End Page content -->
             <!-- ============================================================== -->
 
 
         </div>
-        <!-- FIM wrapper -->
+        <!-- END wrapper -->
 
 
-        <!-- Sobreposição da barra direita-->
+        <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
 
-        <!-- Scripts de fornecedores -->
+        <!-- Vendor js -->
         <script src="assets/js/vendor.min.js"></script>
 
-        <!-- Scripts do Footable -->
+        <!-- Footable js -->
         <script src="assets/libs/footable/footable.all.min.js"></script>
 
-        <!-- Inicialização do script -->
+        <!-- Init js -->
         <script src="assets/js/pages/foo-tables.init.js"></script>
 
-        <!-- Scripts do aplicativo -->
+        <!-- App js -->
         <script src="assets/js/app.min.js"></script>
         
     </body>

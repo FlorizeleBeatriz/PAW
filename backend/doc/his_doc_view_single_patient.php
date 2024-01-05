@@ -60,7 +60,7 @@
                                             <li class="breadcrumb-item active">Vizualizar Pacientes</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title"><?php echo $row->pat_fname;?> <?php echo $row->pat_lname;?>'s Profile</h4>
+                                    <h4 class="page-title">Ficha Médica de <?php echo $row->pat_fname;?> <?php echo $row->pat_lname;?></h4>
                                 </div>
                             </div>
                         </div>
@@ -89,49 +89,49 @@
                             
                             <?php }?>
                             <div class="col-lg-8 col-xl-8">
-                                <!--<div class="card-box">
+                                <div class="card-box">
                                     <ul class="nav nav-pills navtab-bg nav-justified">
                                         <li class="nav-item">
                                             <a href="#aboutme" data-toggle="tab" aria-expanded="false" class="nav-link active">
                                                 Receita
                                             </a>
                                         </li>
-                                    </ul>-->
+                                    </ul>
                                     <!--Medical History-->
-                                    <!--<div class="tab-content">
+                                    <div class="tab-content">
                                         <div class="tab-pane show active" id="aboutme">
                                              <ul class="list-unstyled timeline-sm">
                                                 <?php
-                                                   //$pres_id = isset($_GET['pres_id']) ? $_GET['pres_id'] : null;
+                                                   $pres_id = isset($_GET['pres_id']) ? $_GET['pres_id'] : null;
 
-                                                   //if ($pres_id !== null) {
-                                                   // $ret="SELECT  * FROM his_prescriptions WHERE pres_id = '?'";
-                                                   // $stmt= $mysqli->prepare($ret) ;
-                                                   // $stmt->bind_param('i',$pres_id );
-                                                   // $stmt->execute() ;//ok
-                                                  //  $res=$stmt->get_result();
-                                                  //  $cnt=1;
-                                               // }// else {
+                                                   if ($pres_id !== null) {
+                                                   $ret="SELECT  * FROM his_prescriptions WHERE pres_id = '?'";
+                                                   $stmt= $mysqli->prepare($ret) ;
+                                                   $stmt->bind_param('i',$pres_id );
+                                                   $stmt->execute() ;//ok
+                                                   $res=$stmt->get_result();
+                                                   $cnt=1;
+                                               } else {
                                                 
-                                                    //echo "ID da Prescrição não está definido na URL.";
-                                               // }
+                                                    echo "ID da Prescrição não está definido na URL.";
+                                               }
                                                     
                                                     
-                                                    //while($row=$res->fetch_object())
+                                                    while($row=$res->fetch_object())
                                                         {
-                                                    //$mysqlDateTime = $row->pres_date; //trim timestamp to date
+                                                    $mysqlDateTime = $row->pres_date; //trim timestamp to date
 
                                                 ?>
                                                     <li class="timeline-sm-item">
-                                                        <span class="timeline-sm-date"><?php //echo date("Y-m-d", strtotime($mysqlDateTime));?></span>
+                                                        <span class="timeline-sm-date"><?php echo date("Y-m-d", strtotime($mysqlDateTime));?></span>
                                                        
                                                         <p class="text-muted mt-2">
-                                                            <?php // echo $row->pres_ins;?>
+                                                            <?php echo $row->pres_ins;?>
                                                         </p>
 
                                                     </li>
                                                 <?php }?>
-                                            </ul>-->
+                                            </ul>
                                            
                                         </div> <!-- end tab-pane -->
                                         <!-- end Prescription section content -->

@@ -1,32 +1,60 @@
 <?php
 session_start();
 include('assets/inc/config.php');
+
+// Verifique se a sessão está iniciada
+if (!isset($_SESSION['doc_id'])) {
+    // Redirecione para a página de login se a sessão não estiver iniciada
+    header("Location: login.php");
+    exit();
+}
+
+// Recupere o nome do médico da sessão
+$doc_id = $_SESSION['doc_id'];
+$query = "SELECT doc_fname, doc_lname FROM his_docs WHERE doc_id=?";
+$stmt = $mysqli->prepare($query);
+$stmt->bind_param('i', $doc_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $doc_fname = $row['doc_fname'];
+    $doc_lname = $row['doc_lname'];
+} else {
+    // Se não encontrar o médico, redirecione para a página de login
+    header("Location: login.php");
+    exit();
+}
+
 if (isset($_POST['add_patient_presc'])) {
     $pres_pat_name = $_POST['pres_pat_name'];
     $pres_pat_number = $_POST['pres_pat_number'];
     $pres_pat_addr = $_POST['pres_pat_addr'];
     $pres_pat_age = $_POST['pres_pat_age'];
     $pres_number = $_POST['pres_number'];
+    // Utilize as variáveis de sessão para o nome do médico
+    $pres_doc_name = $doc_fname . ' ' . $doc_lname;
     $pres_ins = $_POST['pres_ins'];
     $pres_phar_name = $_POST['pres_phar_name'];
     $pres_date = $_POST['pres_date'];
+
     //sql to insert captured values
-    $query = "INSERT INTO  his_prescriptions  (pres_pat_name, pres_pat_number, pres_pat_addr, pres_pat_age, pres_number, pres_ins, pres_phar_name, pres_date) VALUES(?,?,?,?,?,?,?,?)";
+    $query = "INSERT INTO  his_prescriptions  (pres_pat_name, pres_pat_number,pres_doc_name, pres_pat_addr, pres_pat_age, pres_number, pres_ins, pres_phar_name, pres_date) VALUES(?,?,?,?,?,?,?,?,?)";
     $stmt = $mysqli->prepare($query);
-    $rc = $stmt->bind_param('ssssssss', $pres_pat_name, $pres_pat_number, $pres_pat_addr, $pres_pat_age, $pres_number, $pres_ins, $pres_phar_name, $pres_date);
+    $rc = $stmt->bind_param('sssssssss', $pres_pat_name, $pres_pat_number, $pres_doc_name, $pres_pat_addr, $pres_pat_age, $pres_number, $pres_ins, $pres_phar_name, $pres_date);
     $stmt->execute();
-    /*
-			*Use Sweet Alerts Instead Of This Fucked Up Javascript Alerts
-			*echo"<script>alert('Successfully Created Account Proceed To Log In ');</script>";
-			*/
-    //declare a varible which will be passed to alert function
+
+    // Declare uma variável que será passada para a função de alerta
     if ($stmt) {
-        $success = "Prescrição  Adicionada.";
+        $success = "Prescrição Adicionada.";
     } else {
         $err = "Tente novamente!";
     }
 }
 ?>
+<!-- Restante do seu código... -->
+
 <!--End Server Side-->
 <!--End Patient Registration-->
 <!DOCTYPE html>
@@ -52,6 +80,7 @@ if (isset($_POST['add_patient_presc'])) {
         <!-- ============================================================== -->
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
+       
         <?php
         $pat_number = $_GET['pat_number'];
         $ret = "SELECT  * FROM his_patients WHERE pat_number=?";
@@ -131,6 +160,10 @@ if (isset($_POST['add_patient_presc'])) {
                                                 </select> 
                                                 <br><button type="button" name="add_textarea" class="ladda-button btn btn-primary" onclick="addMedication()" data-style="expand-right">Adicionar</button> 
                                             </div>
+                                            <div class="form-group col-md-6">
+                                                    <label for="Nome do medico" class="col-form-label">Nome do Medico</label>
+                                                    <input required="required" type="text" readonly name="pres_doc_name" value="<?php echo $doc_fname . ' ' . $doc_lname; ?>">
+                                                </div>
                                            </div>
                                         
                                     </div>

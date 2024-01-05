@@ -112,22 +112,24 @@ if (isset($_POST['add_patient'])) {
                                                     <option value="Malhazine">Malhazine</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-4">
-                                                <label for="inputCity" class="col-form-label">Rua</label>
-                                                <input required="required" type="text" name="pat_addrn" class="form-control" id="inputCity">
+                                            <div class="form-group col-md-2">
+                                                <label for="rua" class="col-form-label">Rua</label>
+                                                <input required="required" type="number" name="pat_addrn" class="form-control" id="rua">
                                             </div>
                                         </div>
+                                        <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <label for="inputCity" class="col-form-label">Contacto</label>
-                                            <input required="required" type="text" name="pat_phone" class="form-control" id="inputCity">
+                                            <input required="required" type="text" name="pat_phone" class="form-control" id="inputCity" placeholder="876367294">
                                         </div>
+                                    </div>
 
                                         <div class="form-group col-md-2" style="display:none">
                                             <?php
                                             $length = 5;
                                             $pat_number =  substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1, $length);
                                             ?>
-                                            <label for="inputZip" class="col-form-label">Patient Number</label>
+                                            <label for="inputZip" class="col-form-label">Número do paciente</label>
                                             <input type="text" name="pat_number" value="<?php echo $pat_number; ?>" class="form-control" id="inputZip">
                                         </div>
 
